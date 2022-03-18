@@ -38,13 +38,17 @@ class LoginForm extends Component {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
+    const url = 'http://localhost:3004/login/'
     const options = {
       method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(userDetails),
     }
     const response = await fetch(url, options)
     const data = await response.json()
+    console.log(data)
 
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
